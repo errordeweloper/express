@@ -2,6 +2,7 @@ const express = require("express")
 const {config} =require('dotenv')
 const productRoute = require('./routers/product-route')
 const categoryRoute = require('./routers/category-route')
+const authRoute = require('./routers/auth-route')
 config()
 
 const port = process.env.PORT || 4000
@@ -11,6 +12,7 @@ app.use(express.json())
 
 app.use('/product', productRoute)
 app.use('/category', categoryRoute)
+app.use('/auth', authRoute)
 app.post('/:id', (req, res)=>{
     res.send({id: req.params.id})
 })
