@@ -1,4 +1,5 @@
 const express = require("express")
+const jwt = require('jsonwebtoken')
 const {config} =require('dotenv')
 const productRoute = require('./routers/product-route')
 const categoryRoute = require('./routers/category-route')
@@ -13,8 +14,15 @@ app.use(express.json())
 app.use('/product', productRoute)
 app.use('/category', categoryRoute)
 app.use('/auth', authRoute)
-app.post('/:id', (req, res)=>{
-    res.send({id: req.params.id})
+app.post('/refresh', (req, res)=>{
+    const {refreshToken} = req.body
+    const accessTokenSecret = process.env.USER_ACCES_TOKEN_SECRET;
+    const refreshTokenSecret = process.env.USER_REFRESH_TOKEN_SECRET;
+    const {username, role} = jwt.verify(refreshToken, refreshTokenSecret)
+    const accesToken = jwt.sign({username,role},accessTokenSecret, {
+        expiresIn:"120s"
+    })
+    res.send({succes: true, error: null, data: {accesToken}}) 
 })
 
 app.post('/', (req,res)=> res.send('Home address. POST method'))
