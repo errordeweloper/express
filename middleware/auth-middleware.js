@@ -7,7 +7,7 @@ function authMiddleware(req, res, next) {
             res.status(400)
             throw new Error('JWT must be provided')
         }
-        const accessTokenSecret = process.env.USER_ACCES_TOKEN_SECRET
+        const accessTokenSecret = process.env.ACCES_TOKEN_SECRET
         const decryptedToken = jwt.verify(token,accessTokenSecret)
         const {username, role} = decryptedToken
         req.username = username

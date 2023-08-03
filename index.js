@@ -16,8 +16,8 @@ app.use('/category', categoryRoute)
 app.use('/auth', authRoute)
 app.post('/refresh', (req, res)=>{
     const {refreshToken} = req.body
-    const accessTokenSecret = process.env.USER_ACCES_TOKEN_SECRET;
-    const refreshTokenSecret = process.env.USER_REFRESH_TOKEN_SECRET;
+    const accessTokenSecret = process.env.ACCES_TOKEN_SECRET;
+    const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
     const {username, role} = jwt.verify(refreshToken, refreshTokenSecret)
     const accesToken = jwt.sign({username,role},accessTokenSecret, {
         expiresIn:"120s"

@@ -19,11 +19,11 @@ authRoute.post('/register/user', (req,res)=>{
 authRoute.post('/register/moderator', (req,res)=>{
     try{
         const {username, password} = req.body
-        if(username != 'moderator' || password != 'moderator1'){
+        if(username != 'user1' || password != 'moderator1'){
             throw new Error(`Wrong username or password`)
         }
-        const accessTokenSecret = process.env.MODERATOR_ACCES_TOKEN_SECRET;
-        const refreshTokenSecret = process.env.MODERATOR_REFRESH_TOKEN_SECRET;
+        const accessTokenSecret = process.env.ACCES_TOKEN_SECRET;
+        const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
         const accesToken = jwt.sign({username, role: "moderator"}, accessTokenSecret, {
             expiresIn:"120s"
         })
@@ -41,11 +41,11 @@ authRoute.post('/register/moderator', (req,res)=>{
 authRoute.post('/register/admin', (req,res)=>{
     try{
         const {username, password} = req.body
-        if(username != 'admin' || password != 'admin7'){
+        if(username != 'user1' || password != 'admin7'){
             throw new Error(`Wrong username or password`)
         }
-        const accessTokenSecret = process.env.ADMIN_ACCES_TOKEN_SECRET;
-        const refreshTokenSecret = process.env.ADMIN_REFRESH_TOKEN_SECRET;
+        const accessTokenSecret = process.env.ACCES_TOKEN_SECRET;
+        const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
         const accesToken = jwt.sign({username, role: "admin"}, accessTokenSecret, {
             expiresIn:"120s"
         })
@@ -66,8 +66,8 @@ authRoute.post('/sign-in/user', (req,res)=>{
         if(username != 'user1' || password != 'user1'){
             throw new Error(`Wrong username or password`)
         }
-        const accessTokenSecret = process.env.USER_ACCES_TOKEN_SECRET;
-        const refreshTokenSecret = process.env.USER_REFRESH_TOKEN_SECRET;
+        const accessTokenSecret = process.env.ACCES_TOKEN_SECRET;
+        const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
         const accesToken = jwt.sign({username, role: "user"}, accessTokenSecret, {
             expiresIn:"120s"
         })
